@@ -17,16 +17,19 @@ namespace GraphicsPractical1
 
         public Camera(Vector3 camEye, Vector3 camFocus, Vector3 camUp, float aspectRatio = 4.0f / 3.0f)
         {
+            // Set the vectors used to create the view matrix.
             this.up = camUp;
             this.eye = camEye;
             this.focus = camFocus;
 
+            // Calculate the view and the projection matrix.
             this.updateViewMatrix();
             this.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, aspectRatio, 1.0f, 300.0f);
         }
 
         private void updateViewMatrix()
         {
+            // Make the camera look from 'eye' to 'focus', with 'up' being which way up is.
             this.viewMatrix = Matrix.CreateLookAt(this.eye, this.focus, this.up);
         }
 
