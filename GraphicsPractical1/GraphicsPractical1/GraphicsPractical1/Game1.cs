@@ -71,7 +71,7 @@ namespace GraphicsPractical1
 
             // Load the heightmap and the terrain.
             Texture2D map = Content.Load<Texture2D>("heightmap");
-            this.terrain = new Terrain(new HeightMap(map), 0.2f);
+            this.terrain = new Terrain(new HeightMap(map), 0.2f, this.GraphicsDevice);
 
             // Create the camera.
             this.camera = new Camera(new Vector3(60, 80, -80), new Vector3(0, 0, 0), new Vector3(0, 1, 0));

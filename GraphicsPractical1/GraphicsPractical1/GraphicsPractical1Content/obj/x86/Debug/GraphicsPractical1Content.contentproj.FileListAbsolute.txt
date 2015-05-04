@@ -1,2 +1,3 @@
 C:\Users\Robin\Desktop\GameProjects\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\obj\x86\Debug\GraphicsPractical1Content.contentprojResolveAssemblyReference.cache
 C:\Users\Robin\Desktop\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\obj\x86\Debug\GraphicsPractical1Content.contentprojResolveAssemblyReference.cache
+C:\Users\Robin\Desktop\GameProjects\GraphicsPrac1\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\obj\x86\Debug\GraphicsPractical1Content.contentprojResolveAssemblyReference.cache

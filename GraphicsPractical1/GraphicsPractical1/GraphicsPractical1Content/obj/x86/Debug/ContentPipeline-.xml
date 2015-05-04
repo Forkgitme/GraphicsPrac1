@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Robin\Desktop\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1\bin\x86\Debug\Content\heightmap.xnb</Output>
+      <Output>C:\Users\Robin\Desktop\GameProjects\GraphicsPrac1\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1\bin\x86\Debug\Content\heightmap.xnb</Output>
       <Time>2015-04-28T09:58:39.2947111+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -17,10 +17,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Robin\Desktop\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Robin\Desktop\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Robin\Desktop\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Robin\Desktop\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Robin\Desktop\GameProjects\GraphicsPrac1\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Robin\Desktop\GameProjects\GraphicsPrac1\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Robin\Desktop\GameProjects\GraphicsPrac1\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Robin\Desktop\GameProjects\GraphicsPrac1\GraphicsPractical1\GraphicsPractical1\GraphicsPractical1\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
