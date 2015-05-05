@@ -21,6 +21,8 @@ namespace GraphicsPractical1
 
         private Terrain terrain;
 
+        //private Vector3 rotation;
+
         private float angle;
         private float[,] heightData;
         
@@ -74,7 +76,7 @@ namespace GraphicsPractical1
             this.terrain = new Terrain(new HeightMap(map), 0.2f, this.GraphicsDevice);
 
             // Create the camera.
-            this.camera = new Camera(new Vector3(60, 80, -80), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+            this.camera = new Camera(new Vector3(0, 80, 100), new Vector3(-0.5f, 0, 0));
 
         }
 
@@ -86,18 +88,15 @@ namespace GraphicsPractical1
         {
             float timeStep = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            float deltaAngle = 0;
             KeyboardState kbState = Keyboard.GetState();
 
-            // Add a value, dependent on the elapsed time since the last update and the pressed key, to the angle.
-            if (kbState.IsKeyDown(Keys.Left))
-                deltaAngle += -3 * timeStep;
-            if (kbState.IsKeyDown(Keys.Right))
-                deltaAngle += 3 * timeStep;
+            // Exit the program with the Esc key.
+            if (kbState.IsKeyDown(Keys.Escape))
+                this.Exit();
 
-            // Use the angle to rotate the camera's eye around the origin.
-            if (deltaAngle != 0)
-                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
+            // Set the rotation of the camera first, and then move the camera.
+            this.AddMouseRotation(Mouse.GetState(), timeStep * 2);
+            this.AddMovement(kbState, timeStep);
 
             // Set the title of the window to also include the frame rate.
             this.Window.Title = "Graphics Tutorial | FPS: " + this.frameRateCounter.FrameRate;
@@ -139,25 +138,47 @@ namespace GraphicsPractical1
             base.Draw(gameTime);
         }
 
-        //private void loadHeightData()
-        //{
-        //    this.heightData = new float[4, 3];
+        public void AddMouseRotation(MouseState mouseState, float timeStep)
+        {   //This method adds a value to the camera's rotation based on how the user moved his mouse.
+            Vector3 rotation = this.camera.Rotation;
 
-        //    this.heightData[0, 0] = 0;
-        //    this.heightData[1, 0] = 0;
-        //    this.heightData[2, 0] = 0;
-        //    this.heightData[3, 0] = 0;
-            
-        //    this.heightData[0, 1] = 0.5f;
-        //    this.heightData[1, 1] = 0;
-        //    this.heightData[2, 1] = -1.0f;
-        //    this.heightData[3, 1] = 0.2f;
+            // Calculate how much the user moved the mouse.
+            float yDifference = mouseState.X - 400;
+            float xDifference = mouseState.Y - 300;
 
-        //    this.heightData[0, 2] = 1.0f;
-        //    this.heightData[1, 2] = 1.2f;
-        //    this.heightData[2, 2] = 0.8f;
-        //    this.heightData[3, 2] = 0;
-        //}
+            // Rotate the camera based on that.
+            rotation.Y = (rotation.Y - timeStep * yDifference) % (float)(Math.PI * 2);
+            rotation.X = MathHelper.Clamp(rotation.X - timeStep * xDifference, -(float)(Math.PI / 2), (float)(Math.PI / 2));
 
+            // Put the mouse in the center of the screen.
+            Mouse.SetPosition(400, 300);
+
+            // Set the camera's rotation.
+            this.camera.Rotation = rotation;
+        }
+
+        public void AddMovement(KeyboardState kbState, float timeStep)
+        {   // This methods moves the camera (the 'eye').
+            Vector3 deltaPosition = Vector3.Zero;
+
+            const int SCALE = 50;
+
+            // Calculate how much the camera should move were it not rotated.
+            if (kbState.IsKeyDown(Keys.A))
+                deltaPosition += -Vector3.UnitX * SCALE * timeStep;
+            if (kbState.IsKeyDown(Keys.D))
+                deltaPosition += Vector3.UnitX * SCALE * timeStep;
+            if (kbState.IsKeyDown(Keys.W))
+                deltaPosition += -Vector3.UnitZ * SCALE * timeStep;
+            if (kbState.IsKeyDown(Keys.S))
+                deltaPosition += Vector3.UnitZ * SCALE * timeStep;
+            if (kbState.IsKeyDown(Keys.Q))
+                deltaPosition += -Vector3.UnitY * SCALE * timeStep;
+            if (kbState.IsKeyDown(Keys.E))
+                deltaPosition += Vector3.UnitY * SCALE * timeStep;
+
+            // Rotate the unrotated vector and add it to the camera's position.
+            this.camera.Eye += Vector3.Transform(deltaPosition, this.camera.RotationMatrix);
+        }
     }
 }
