@@ -97,7 +97,7 @@ namespace GraphicsPractical1
             // Set the rotation of the camera first, and then move the camera.
             this.AddMouseRotation(Mouse.GetState(), timeStep * 2);
             this.AddMovement(kbState, timeStep);
-            this.camera.Eye = terrain.clipEye(this.camera.Eye);
+            this.camera.Eye = terrain.clipEye(this.camera.Eye, timeStep);
             Console.WriteLine("X: " + this.camera.Eye.X + "Y: " + this.camera.Eye.Y + "Z: " + this.camera.Eye.Z);
 
             // Set the title of the window to also include the frame rate.

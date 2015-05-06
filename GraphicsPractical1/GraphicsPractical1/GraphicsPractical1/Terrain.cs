@@ -149,20 +149,23 @@ namespace GraphicsPractical1
             device.SetVertexBuffer(this.vertexBuffer);
         }
 
-        public Vector3 clipEye(Vector3 eye)
+        public Vector3 clipEye(Vector3 eye, float timeStep)
         {
 
 
             float xdif = eye.X - (int)eye.X;
-            float ydif = eye.Z - (int)eye.Z;
+            float ydif = 1 - (eye.Z - (int)eye.Z);
 
-            float weight1 = xdif * ydif;
-            float weight2 = (1 - xdif) * ydif;
-            float weight3 = xdif * (1 - ydif);
-            float weight4 = 1 - (weight1 = weight2 + weight3);
+            float weight1 = (1 - xdif) * (1 - ydif);
+            float weight3 = (1 - xdif) * ydif;
+            float weight2 = xdif * (1 - ydif);
+            float weight4 = 1 - (weight1 + weight2 + weight3);
 
             float meanHeight = weight1 * heightmapV[(int)eye.X + 64, -(int)eye.Z + 64] + weight2 * heightmapV[(int)eye.X + 65, -(int)eye.Z + 64] + weight3 * heightmapV[(int)eye.X + 64, -(int)eye.Z + 65] + weight4 * heightmapV[(int)eye.X + 65, -(int)eye.Z + 65];
-            eye.Y = meanHeight * 0.2f + 5;
+            
+            float terrainHeight = meanHeight * 0.2f + 5;
+            eye.Y += (terrainHeight - eye.Y) * timeStep * 20;
+
             Console.WriteLine("HM Coords: X: " + ((int)eye.X + 64) + " Y: " + ((int)eye.Z + 64));
             return eye;
         }
