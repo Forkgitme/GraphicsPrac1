@@ -151,8 +151,19 @@ namespace GraphicsPractical1
 
         public Vector3 clipEye(Vector3 eye)
         {
-            eye.Y = heightmapV[(int)eye.X + 64, (int)eye.Z + 64] * 0.2f + 3;
-            Console.WriteLine("HM Coords: X: " + (int)eye.X + 64 + " Y: " + (int)eye.Z + 64);
+
+
+            float xdif = eye.X - (int)eye.X;
+            float ydif = eye.Z - (int)eye.Z;
+
+            float weight1 = xdif * ydif;
+            float weight2 = (1 - xdif) * ydif;
+            float weight3 = xdif * (1 - ydif);
+            float weight4 = 1 - (weight1 = weight2 + weight3);
+
+            float meanHeight = weight1 * heightmapV[(int)eye.X + 64, -(int)eye.Z + 64] + weight2 * heightmapV[(int)eye.X + 65, -(int)eye.Z + 64] + weight3 * heightmapV[(int)eye.X + 64, -(int)eye.Z + 65] + weight4 * heightmapV[(int)eye.X + 65, -(int)eye.Z + 65];
+            eye.Y = meanHeight * 0.2f + 5;
+            Console.WriteLine("HM Coords: X: " + ((int)eye.X + 64) + " Y: " + ((int)eye.Z + 64));
             return eye;
         }
     }
