@@ -97,7 +97,6 @@ namespace GraphicsPractical1
             // Set the rotation of the camera first, and then move the camera.
             this.AddMouseRotation(Mouse.GetState(), timeStep * 2);
             this.AddMovement(kbState, timeStep);
-            if(camera.Eye.X >= -64 && camera.Eye.X <= 64 && camera.Eye.Z >= -64 && camera.Eye.Z <= 64)
             this.camera.Eye = terrain.clipEye(this.camera.Eye, timeStep);
             Console.WriteLine("X: " + this.camera.Eye.X + "Y: " + this.camera.Eye.Y + "Z: " + this.camera.Eye.Z);
 
