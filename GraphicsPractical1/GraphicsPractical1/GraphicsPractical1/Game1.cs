@@ -76,7 +76,7 @@ namespace GraphicsPractical1
             this.terrain = new Terrain(new HeightMap(map), 0.2f, this.GraphicsDevice);
 
             // Create the camera.
-            this.camera = new Camera(new Vector3(0, 80, 100), new Vector3(-0.5f, 0, 0));
+            this.camera = new Camera(new Vector3(0, 80, 50), new Vector3(-0.5f, 0, 0));
 
         }
 
@@ -97,6 +97,8 @@ namespace GraphicsPractical1
             // Set the rotation of the camera first, and then move the camera.
             this.AddMouseRotation(Mouse.GetState(), timeStep * 2);
             this.AddMovement(kbState, timeStep);
+            this.camera.Eye = terrain.clipEye(this.camera.Eye);
+            //Console.WriteLine("X: " + this.camera.Eye.X + "Y: " + this.camera.Eye.Y + "Z: " + this.camera.Eye.Z);
 
             // Set the title of the window to also include the frame rate.
             this.Window.Title = "Graphics Tutorial | FPS: " + this.frameRateCounter.FrameRate;
@@ -161,7 +163,7 @@ namespace GraphicsPractical1
         {   // This methods moves the camera (the 'eye').
             Vector3 deltaPosition = Vector3.Zero;
 
-            const int SCALE = 50;
+            const int SCALE = 10;
 
             // Calculate how much the camera should move were it not rotated.
             if (kbState.IsKeyDown(Keys.A))

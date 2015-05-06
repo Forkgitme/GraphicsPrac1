@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace GraphicsPractical1
         private short[] indices;
         private VertexPositionColorNormal[] vertices;
 
+        private HeightMap heightmapV;
+
         public int Width
         {
             get { return this.width; }
@@ -25,7 +28,7 @@ namespace GraphicsPractical1
 
         public int Height
         {
-            get { return this.Height; }
+            get { return this.height; }
         }
 
         public Terrain(HeightMap heightMap, float heightScale, GraphicsDevice device)
@@ -33,6 +36,8 @@ namespace GraphicsPractical1
             // Set the width and the height of the terrain.
             this.width = heightMap.Width;
             this.height = heightMap.Height;
+
+            heightmapV = heightMap;
 
             // Create an array with vertices and calculate the corresponding indices.
             this.vertices = this.loadVertices(heightMap, heightScale);
@@ -142,6 +147,13 @@ namespace GraphicsPractical1
             // Tells the graphics device to read from its own internal memory.
             device.Indices = this.indexBuffer;
             device.SetVertexBuffer(this.vertexBuffer);
+        }
+
+        public Vector3 clipEye(Vector3 eye)
+        {
+            eye.Y = heightmapV[(int)eye.X + 64, (int)eye.Z + 64] * 0.2f + 3;
+            Console.WriteLine("HM Coords: X: " + (int)eye.X + 64 + " Y: " + (int)eye.Z + 64);
+            return eye;
         }
     }
 }
