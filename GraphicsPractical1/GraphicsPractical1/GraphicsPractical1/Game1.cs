@@ -178,7 +178,8 @@ namespace GraphicsPractical1
                 deltaPosition += Vector3.UnitY * SCALE * timeStep;
 
             // Rotate the unrotated vector and add it to the camera's position.
-            this.camera.Eye += Vector3.Transform(deltaPosition, this.camera.RotationMatrix);
+            Matrix rotation = Matrix.CreateRotationY(this.camera.Rotation.Y);
+            this.camera.Eye += Vector3.Transform(deltaPosition, rotation);
         }
     }
 }
